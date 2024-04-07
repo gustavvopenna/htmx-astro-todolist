@@ -1,0 +1,18 @@
+---
+import { db, Todo, eq } from 'astro:db'
+import TodoItem from '../../../components/Todo.astro'
+
+if(Astro.request.method === 'DELETE') {
+  const { id } = Astro.params
+  await db.delete(Todo).where(eq(Todo.id, String(id)))
+}
+
+const todos = await db.select().from(Todo).all()
+---
+
+{
+  todos.map(todo => (
+    <TodoItem todo={todo} />
+  ))
+}
+

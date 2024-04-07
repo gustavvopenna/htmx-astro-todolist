@@ -1,0 +1,33 @@
+---
+import { db, Todo } from 'astro:db'
+import crypto from 'crypto'
+
+import TodoItem from '../../../components/Todo.astro'
+
+export const partial = true
+
+let todos = await db.select().from(Todo).all()
+const count = todos.length
+
+const createNewTodo = (text: string) => ({
+  id: crypto.randomUUID(),
+  text,
+  completed: false
+})
+
+if(Astro.request.method === 'POST') {
+  const data = await Astro.request.formData()
+  const newTodo = createNewTodo(data.get('text') as string)
+  
+  await db.insert(Todo).values(newTodo)
+}
+
+todos = await db.select().from(Todo).all()
+---
+
+{
+  todos.map(todo => (
+      <TodoItem todo={todo} />
+  ))
+}
+
