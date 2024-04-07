@@ -8,10 +8,18 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Astro + HTMX</title>
 		<script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="px-4 py-2">
+		<form hx-post="/partials/todos" hx-target="#todos">
+			<input class="rounded border px-2 py-1" type="text" name="text" id="todo" placeholder="Agrega una tarea">
+			<button class="bg-black text-white px-2 py-1 rounded" type="submit">Añadir</button>
+		</form>
+
+		<div class="mt-4">
+			<h1 class="text-lg underline">Mis tareas</h1>
+			<ul id="todos" hx-get="/partials/todos" hx-trigger="load"></ul>
+		</div>
 	</body>
 </html>
