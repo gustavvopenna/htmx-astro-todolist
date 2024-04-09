@@ -7,7 +7,7 @@ const { todo } = Astro.props
   {todo.text}
   <svg
     hx-delete={`/partials/todos/${todo.id}`}
-    hx-target="#todos"
+    hx-target="body"
     class="w-4 h-4 cursor-pointer"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
