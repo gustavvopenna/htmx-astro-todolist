@@ -25,7 +25,7 @@ const todos = await db.select().from(Todo).all()
 			<ul id="todos">
 				{
 					todos.map(todo => (
-						<TodoItem key={todo.id} todo={todo} />
+						<TodoItem todo={todo} />
 					))
 				}
 			</ul>
