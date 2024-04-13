@@ -22,6 +22,10 @@
     "typescript": "^5.4.4"
   },
   "devDependencies": {
-    "@flydotio/dockerfile": "^0.5.4"
+    "@flydotio/dockerfile": "^0.5.4",
+    "eslint": "^9.0.0",
+    "eslint-plugin-astro": "^0.34.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0"
   }
 }
