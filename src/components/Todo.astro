@@ -15,22 +15,26 @@ interface Props {
 const { todo } = Astro.props
 ---
 
-<li id={todo.id} class="flex gap-2 items-center">
-  <input
-    type="checkbox"
-    checked={todo.completed}
+<li id={todo.id}>
+  <form
+    class="flex gap-2 items-center"
     hx-patch=`/partials/todos/${todo.id}`
     hx-target=`#${todo.id}`
     hx-trigger="change"
-    x-on:change="alert('changed')"
-  />
-  {todo.text}
-  <EditIcon
-    hx-get=`/partials/todos/${todo.id}/edit`
-    hx-target=`#${todo.id}`
-  />
-  <DeleteIcon
-    hx-delete=`/partials/todos/${todo.id}`
-    hx-target="body"
-  />
+  >
+    <input
+      type="checkbox"
+      checked={todo.completed}
+      name="completed"
+    />
+    {todo.text}
+    <EditIcon
+      hx-get=`/partials/todos/${todo.id}/edit`
+      hx-target=`#${todo.id}`
+    />
+    <DeleteIcon
+      hx-delete=`/partials/todos/${todo.id}`
+      hx-target="body"
+    />
+  </form>
 </li>

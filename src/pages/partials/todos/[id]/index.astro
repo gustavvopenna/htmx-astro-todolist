@@ -8,13 +8,20 @@ let updatedTodo
 
 if(Astro.request.method === 'DELETE') {
   const { id } = Astro.params
+
   await db.delete(Todo).where(eq(Todo.id, String(id)))
   return Astro.redirect('/', 303)
 }
 
 if(Astro.request.method === 'PATCH') {
   const { id } = Astro.params
-  updatedTodo = await db.update(Todo).set({ completed: true }).where(eq(Todo.id, String(id))).returning().then((todos) => todos[0])
+  const formData = await Astro.request.formData()
+  const completed = formData.get('completed') === 'on' ? true : false
+
+  updatedTodo = await db.update(Todo)
+    .set({ completed })
+    .where(eq(Todo.id, String(id)))
+    .returning().then((todos) => todos[0])
 }
 ---
 
