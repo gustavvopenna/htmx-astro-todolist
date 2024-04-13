@@ -4,12 +4,12 @@ import { db, eq, Todo } from "astro:db"
 const { id } = Astro.params
 
 const todo = await db.select().from(Todo).where(eq(Todo.id, String(id))).then(data => data[0])
-console.log({ todo })
 ---
 
-<form hx-put=`/partials/todos/${id}`>
+<form hx-put=`/partials/todos/${id}` hx-target=`#${id}`>
   <input
     type="text"
+    name="text"
     value={todo.text}
   />
 </form>

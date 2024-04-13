@@ -13,16 +13,27 @@ if(Astro.request.method === 'DELETE') {
   return Astro.redirect('/', 303)
 }
 
+if(Astro.request.method === 'PUT') {
+  const id = Astro.params.id as string
+  const formData = await Astro.request.formData()
+  const text = formData.get('text') as string
+
+  updatedTodo = await db.update(Todo)
+    .set({ text })
+    .where(eq(Todo.id, id))
+    .returning().then(data => data[0])
+}
+
 if(Astro.request.method === 'PATCH') {
-  const { id } = Astro.params
+  const id = Astro.params.id as string
   const formData = await Astro.request.formData()
   const completed = formData.get('completed') === 'on' ? true : false
 
   updatedTodo = await db.update(Todo)
     .set({ completed })
-    .where(eq(Todo.id, String(id)))
+    .where(eq(Todo.id, id))
     .returning().then((todos) => todos[0])
 }
 ---
 
-{Astro.request.method === 'PATCH' ? <TodoItem todo={updatedTodo!} /> : null}
+<TodoItem todo={updatedTodo!} />

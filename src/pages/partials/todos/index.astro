@@ -12,16 +12,17 @@ const createNewTodo = (text: string) => ({
   completed: false
 })
 
-let insertedTodo = null
+let todo = null
 
 if(Astro.request.method === 'POST') {
   const data = await Astro.request.formData()
   const newTodo = createNewTodo(data.get('text') as string)
 
-  insertedTodo = await db.insert(Todo).values(newTodo).returning().then((res) => res[0])
+  todo = await db.insert(Todo)
+    .values(newTodo)
+    .returning().then((res) => res[0])
 }
-
 ---
 
-<TodoItem todo={insertedTodo!} />
+<TodoItem todo={todo!} />
 
