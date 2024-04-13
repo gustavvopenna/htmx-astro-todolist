@@ -1,7 +1,7 @@
 ---
 import { db, Todo } from 'astro:db'
-import TodoItem from '../components/Todo.astro'
-import CreateTodoForm from '../components/CreateTodoForm.astro'
+import TodoItem from '@components/Todo.astro'
+import CreateTodoForm from '@components/CreateTodoForm.astro'
 
 const todos = await db.select().from(Todo).all()
 ---
