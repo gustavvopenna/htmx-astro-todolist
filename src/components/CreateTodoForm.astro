@@ -1,0 +1,15 @@
+<form
+  hx-post="/partials/todos"
+  hx-target="#todos"
+  hx-swap="beforeend"
+  hx-on::after-request="this.reset()"
+>
+  <input
+    class="rounded border px-2 py-1" 
+    type="text"
+    name="text"
+    id="todo"
+    placeholder="Agrega una tarea"
+  >
+  <button class="bg-black text-white px-2 py-1 rounded" type="submit">Añadir</button>
+</form>

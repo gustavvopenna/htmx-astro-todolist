@@ -1,6 +1,7 @@
 ---
 import { db, Todo } from 'astro:db'
 import TodoItem from '../components/Todo.astro'
+import CreateTodoForm from '../components/CreateTodoForm.astro'
 
 const todos = await db.select().from(Todo).all()
 ---
@@ -15,17 +16,7 @@ const todos = await db.select().from(Todo).all()
 		<script is:inline src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
 	</head>
 	<body class="px-4 py-2">
-		<form hx-post="/partials/todos" hx-target="#todos" hx-swap="beforeend">
-			<input
-				class="rounded border px-2 py-1" 
-				type="text"
-				name="text"
-				id="todo"
-				placeholder="Agrega una tarea"
-			>
-			<button class="bg-black text-white px-2 py-1 rounded" type="submit">Añadir</button>
-		</form>
-
+		<CreateTodoForm />
 		<div class="mt-4">
 			<h1 class="text-lg underline">Mis tareas</h1>
 			<ul id="todos">
