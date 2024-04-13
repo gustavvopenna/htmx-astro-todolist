@@ -2,12 +2,12 @@
 export const partial = true
 
 import { db, Todo } from 'astro:db'
-import crypto from 'crypto'
 
-import TodoItem from '../../../components/Todo.astro'
+import TodoItem from '@components/Todo.astro'
+import generateId from '@utils/index'
 
 const createNewTodo = (text: string) => ({
-  id: crypto.randomUUID(),
+  id: generateId(),
   text,
   completed: false
 })
