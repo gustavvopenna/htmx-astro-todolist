@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  ASTRO_STUDIO_APP_TOKEN: ${{secrets.ASTRO_STUDIO_APP_TOKEN }}
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,7 +21,7 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npx astro check && ASTRO_STUDIO_APP_TOKEN=${{ secrets.ASTRO_STUDIO_APP_TOKEN }} npx astro build --remote"
+      run: astro check && astro build --remote"
 
     - name: Deploy to Fly.io
       uses: superfly/flyctl-actions@v1
@@ -25,4 +29,3 @@ jobs:
         args: deploy  # Usa aquí los argumentos que necesites para el despliegue
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
