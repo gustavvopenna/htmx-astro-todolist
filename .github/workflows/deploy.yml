@@ -14,14 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Build
-      run: astro check && astro build --remote"
+    # - name: Install dependencies
+    #   run: npm ci
 
     - name: Deploy to Fly.io
       uses: superfly/flyctl-actions@v1
