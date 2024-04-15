@@ -15,7 +15,7 @@ const todos = await db.select().from(Todo).all()
 		<title>Astro + HTMX</title>
 		<script is:inline src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
 	</head>
-	<body class="px-4 py-2">
+	<body class="px-4 py-2 bg-slate-900 text-gray-50">
 		<CreateTodoForm />
 		<div class="mt-4">
 			<h1 class="text-lg underline">Mis tareas</h1>

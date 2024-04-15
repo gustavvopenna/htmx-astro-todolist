@@ -1,3 +1,7 @@
+---
+import Button from "./UI/Button.astro";
+---
+
 <form
   hx-post="/partials/todos"
   hx-target="#todos"
@@ -5,11 +9,11 @@
   hx-on::after-request="this.reset()"
 >
   <input
-    class="rounded border px-2 py-1" 
+    class="rounded border px-2 py-1 bg-slate-800" 
     type="text"
     name="text"
     id="todo"
     placeholder="Agrega una tarea"
   >
-  <button class="bg-black text-white px-2 py-1 rounded" type="submit">Añadir</button>
+  <Button type="submit">Añadir</Button>
 </form>
