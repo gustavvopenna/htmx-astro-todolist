@@ -17,9 +17,7 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm run build
-      env:
-        ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
+      run: astro check && ASTRO_STUDIO_APP_TOKEN=${{ secrets.ASTRO_STUDIO_APP_TOKEN }} astro build --remote"
 
     - name: Deploy to Fly.io
       uses: superfly/flyctl-actions@v1
