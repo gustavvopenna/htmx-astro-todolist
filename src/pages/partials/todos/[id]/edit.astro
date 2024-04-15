@@ -1,15 +1,25 @@
 ---
 import { db, eq, Todo } from "astro:db"
+import Button from "@components/UI/Button.astro"
 
 const { id } = Astro.params
 
 const todo = await db.select().from(Todo).where(eq(Todo.id, String(id))).then(data => data[0])
 ---
 
-<form hx-put=`/partials/todos/${id}` hx-target=`#${id}`>
+<form
+  hx-put=`/partials/todos/${id}`
+  hx-target=`#${id}`
+>
   <input
     type="text"
     name="text"
     value={todo.text}
+    autofocus
+    onfocus="this.setSelectionRange(this.value.length, this.value.length)"
+    hx-get=`/partials/todos/${id}`
+    hx-target="closest form"
+    hx-trigger="keyup[key=='Escape']"
   />
+  <Button type="submit">Guardar</Button>
 </form>
